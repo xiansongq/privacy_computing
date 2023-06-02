@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>page3</class>
+ <widget class="QMainWindow" name="page3">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="page"/>
+    <widget class="QWidget" name="page_2">
+     <widget class="QWidget" name="widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>49</y>
+        <width>620</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>10</y>
+         <width>30</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 14pt &quot;Adobe 宋体 Std L&quot;;
+color:rgb(0, 85, 255);</string>
+       </property>
+       <property name="text">
+        <string>IP：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>10</y>
+         <width>60</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 14pt &quot;Adobe 宋体 Std L&quot;;
+color:rgb(0, 85, 255)</string>
+       </property>
+       <property name="text">
+        <string>端口：</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="ip">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>10</y>
+         <width>180</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="port">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>10</y>
+         <width>74</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>50</y>
+         <width>60</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 14pt &quot;Adobe 宋体 Std L&quot;;
+color:rgb(0, 85, 255);</string>
+       </property>
+       <property name="text">
+        <string>文件：</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="filepath">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>50</y>
+         <width>265</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="choisefile">
+       <property name="geometry">
+        <rect>
+         <x>390</x>
+         <y>50</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+font: 25 10pt &quot;Microsoft YaHei&quot;;</string>
+       </property>
+       <property name="text">
+        <string>选择文件</string>
+       </property>
+       <property name="icon">
+        <iconset resource="icon.qrc">
+         <normaloff>:/png/img/choisefile.png</normaloff>:/png/img/choisefile.png</iconset>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="isserver">
+       <property name="geometry">
+        <rect>
+         <x>450</x>
+         <y>10</y>
+         <width>131</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 14pt &quot;Adobe 宋体 Std L&quot;;
+color:rgb(255, 0, 0)</string>
+       </property>
+       <property name="text">
+        <string>协议接收方？</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="startcpu">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>100</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 25 10pt &quot;Microsoft YaHei&quot;;</string>
+       </property>
+       <property name="text">
+        <string>开始计算</string>
+       </property>
+       <property name="icon">
+        <iconset resource="icon.qrc">
+         <normaloff>:/png/img/start.png</normaloff>:/png/img/start.png</iconset>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>620</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 25 9pt &quot;Adobe 宋体 Std L&quot;;
+color:rgb(255, 0, 0)</string>
+      </property>
+      <property name="text">
+       <string>提示：联机执行两方PSI，首先要输入对方ip地址和端口号，已经要指明谁是结果的接收者，接收者只能有一方。</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::RichText</enum>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPSI">
+    <property name="title">
+     <string>PSI联机求交</string>
+    </property>
+   </widget>
+   <addaction name="menuPSI"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="icon.qrc"/>
+ </resources>
+ <connections/>
+</ui>

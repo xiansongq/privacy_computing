@@ -1,0 +1,144 @@
+//
+// Created by 17579 on 2023/5/30.
+//
+
+#ifndef PRIVATE_PAGES_H
+#define PRIVATE_PAGES_H
+
+#include <QMainWindow>
+#include <QTextBrowser>
+#include <QPushButton>
+#include <QDebug>
+#include <QString>
+#include<QFileDialog>
+#include<QMessageBox>
+#include <QProgressDialog>
+#include "loading.h"
+#include <QFuture>
+#include <QFutureWatcher>
+#include <QtConcurrent>
+#include <functional>
+//#include "../include/WorkThread.h"
+namespace Ui {
+    class page1;
+
+    class page2;
+
+    class page3;
+
+    class page4;
+
+    class page5;
+}
+
+class page1 : public QMainWindow {
+    Q_OBJECT
+
+public:
+    explicit page1(QWidget *parent = nullptr);
+
+    ~page1();
+
+private:
+    Ui::page1 *ui;
+};
+
+class page2 : public QMainWindow {
+    Q_OBJECT
+
+public:
+    explicit page2(QWidget *parent = nullptr);
+
+    ~page2();
+
+private
+    slots:
+            void on_file1but_clicked();
+
+    void on_file2but_clicked();
+
+    void on_startcup_clicked();
+    void on_savefile_clicked();
+private:
+    Ui::page2 *ui;
+    QTextBrowser *textBrowser;
+    QPushButton *savefile;
+    Loading *loading1;
+    QLabel *speedlabel;
+};
+
+class page3 : public QMainWindow {
+    Q_OBJECT
+
+public:
+    explicit page3(QWidget *parent = nullptr);
+
+    ~page3();
+
+private
+    slots:
+            void on_choisefile_clicked();
+
+    void on_startcpu_clicked();
+
+    void on_savefile_clicked();
+
+private:
+    Ui::page3 *ui;
+    QTextBrowser *textBrowser;
+    QPushButton *savefile;
+    Loading *loading1;
+    QLabel *speedlabel;
+};
+
+class page4 : public QMainWindow {
+    Q_OBJECT
+
+public:
+    explicit page4(QWidget *parent = nullptr);
+
+    ~page4();
+
+private
+    slots:
+            void on_file1but_clicked();
+
+    void on_file2but_clicked();
+
+    void on_startcup_clicked();
+
+    void handleSaveFile();
+
+private:
+    Ui::page4 *ui;
+    QTextBrowser *textBrowser;
+    QPushButton *savefile;
+    Loading *loading1;
+    QLabel *speedlabel;
+};
+
+class page5 : public QMainWindow {
+    Q_OBJECT
+
+public:
+    explicit page5(QWidget *parent = nullptr);
+
+    ~page5();
+
+private
+    slots:
+            void on_choisefile_clicked();
+
+    void on_startcpu_clicked();
+
+    void on_savefile_clicked();
+
+private:
+    Ui::page5 *ui;
+    QTextBrowser *textBrowser;
+    QPushButton *savefile;
+    Loading *loading1;
+    QLabel *speedlabel;
+};
+
+#endif //PRIVATE_PAGES_H
