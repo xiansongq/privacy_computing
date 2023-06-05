@@ -18,6 +18,7 @@
 #include <QFutureWatcher>
 #include <QtConcurrent>
 #include <functional>
+
 //#include "../include/WorkThread.h"
 namespace Ui {
     class page1;
@@ -41,6 +42,7 @@ public:
 
 private:
     Ui::page1 *ui;
+    QLabel *label1;
 };
 
 class page2 : public QMainWindow {

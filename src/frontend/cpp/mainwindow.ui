@@ -32,7 +32,7 @@
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>549</height>
+         <height>600</height>
         </size>
        </property>
        <property name="columnCount">
@@ -164,7 +164,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

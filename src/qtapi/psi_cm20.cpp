@@ -7,15 +7,19 @@
 namespace PSI {
     //创建本地执行 psi 的api 需要两个函数 一边模拟 receiver 一边模拟 sender
     void static localpsireceiver(OTEOPRF::PP pp, std::vector <block> vecx, Message &message, int slen) {
-
-        NetIO server("server", "127.0.0.1", 8082);
-        message = OPRFPSI::Receive(server, pp, vecx);
+        try {
+            NetIO server("server", "127.0.0.1", 8082);
+            message = OPRFPSI::Receive(server, pp, vecx);
+        } catch (std::exception &e) {
+            message.msg = e.what();
+            message.code = 0;
+        }
         //去除多余的数据
-        std::vector<std::string> ans(message.data.size()-slen);
-        for(int i=0;i<message.data.size()- slen;i++)
-            ans[i]=message.data[i];
-        message.data=ans;
-        std::cout<<"ans size "<<ans.size()<<std::endl;
+        std::vector <std::string> ans(message.data.size() - slen);
+        for (int i = 0; i < message.data.size() - slen; i++)
+            ans[i] = message.data[i];
+        message.data = ans;
+        std::cout << "ans size " << ans.size() << std::endl;
 //        std::cout<<"data size: "<<message.data.size()<<std::endl;
 //        std::cout<<"data 0"<<Block::BlockToInt64(message.data[0])<<std::endl;
 
@@ -23,10 +27,14 @@ namespace PSI {
 
 //创建本地执行 psi 的api 需要两个函数 一边模拟 receiver 一边模拟 sender
     inline void static localpsisender(OTEOPRF::PP pp, std::vector <block> vecy, Message &message) {
+        try {
+            NetIO client("client", "127.0.0.1", 8082);
+            message = OPRFPSI::Send(client, pp, vecy);
+        } catch (std::exception &e) {
+            message.code = 0;
+            message.msg = e.what();
+        }
 
-        NetIO client("client", "127.0.0.1", 8082);
-
-        message=OPRFPSI::Send(client, pp, vecy);
 
     }
 
@@ -80,16 +88,17 @@ namespace PSI {
         fin1.close();
         //数据补齐
         for (int i = 0; i < slen; i++) vec_y.push_back(Block::MakeBlock(0LL, 0LL));
-        std::cout << vec_x.size() <<" "<<vec_y.size()<< std::endl;
+        std::cout << vec_x.size() << " " << vec_y.size() << std::endl;
         CRYPTO_Initialize();
         OTEOPRF::PP pp;
         pp = OTEOPRF::Setup(ceil(log2(len)), 40);
 
-        std::thread receiverthread(PSI::localpsireceiver, std::move(pp), std::move(vec_x), std::ref(message1),std::move(slen));
+        std::thread receiverthread(PSI::localpsireceiver, std::move(pp), std::move(vec_x), std::ref(message1),
+                                   std::move(slen));
 
         std::thread senderthread(PSI::localpsisender, std::move(pp), std::move(vec_y), std::ref(message2));
 
-       // std::thread receiverthread(PSI::localpsireceiver, pp, vec_x,&message2,slen);
+        // std::thread receiverthread(PSI::localpsireceiver, pp, vec_x,&message2,slen);
         //std::thread senderthread(PSI::localpsisender, pp, vec_y, &message1);
         receiverthread.join();
         senderthread.join();
@@ -136,15 +145,21 @@ namespace PSI {
         CRYPTO_Initialize();
         OTEOPRF::PP pp;
         pp = OTEOPRF::Setup(ceil(log2(len)), 40);
-       // std::cout<<"ip info1 "<<isserver<<std::endl;
+        // std::cout<<"ip info1 "<<isserver<<std::endl;
         // 执行协议
         if (isserver == "1") {
-            std::cout<<"ip info "<<ip<<" "<<port<<" "<<isserver<<std::endl;
-            std::cout<<std::stoi(port)<<std::endl;
-            NetIO server("server", ip, std::stoi(port));
-            message = OPRFPSI::Receive(server, pp, vec_y);
+            try {
+
+                NetIO server("server", ip, std::stoi(port));
+                message = OPRFPSI::Receive(server, pp, vec_y);
+            }
+            catch (std::exception &e) {
+                message.code = 0;
+                message.msg = e.what();
+                return message;
+            }
             //提出 用来删除补充的数据
-            std::vector <std::string> ans(message.data.size()-slen);
+            std::vector <std::string> ans(message.data.size() - slen);
             for (int i = 0; i < message.data.size() - slen; i++) {
                 ans[i] = message.data[i];
             }
@@ -152,8 +167,14 @@ namespace PSI {
             message.msg = "执行成功";
             message.data = ans;
         } else {
-            NetIO client("client", ip, std::stoi(port));
-            message = OPRFPSI::Send(client, pp, vec_y);
+            try {
+                NetIO client("client", ip, std::stoi(port));
+                message = OPRFPSI::Send(client, pp, vec_y);
+            } catch (std::exception &e) {
+                message.code = 0;
+                message.msg = e.what();
+                return message;
+            }
             message.code = 200;
             message.msg = "执行成功";
 
@@ -162,8 +183,5 @@ namespace PSI {
         return message;
     }
 
-    void test() {
-        std::cout << "Test function" << std::endl;
-    }
 
 }

@@ -76,35 +76,9 @@ file(GLOB_RECURSE QTSOURCES
         "src/frontend/*.h"
         "src/frontend/*.ui"
         )
-add_executable(private
-        src/frontend/include/mainwindow.h
-        src/frontend/cpp/mainwindow.cpp
-        src/frontend/cpp/mainwindow.ui
-#        src/frontend/include/page1.h
-#        src/frontend/cpp/page1.cpp
-#        src/frontend/cpp/page1.ui
-#        src/frontend/include/page2.h
-#        src/frontend/cpp/page2.cpp
-#        src/frontend/cpp/page2.ui
-#        src/frontend/include/page3.h
-#        src/frontend/cpp/page3.cpp
-#        src/frontend/cpp/page3.ui
-#        src/frontend/include/page4.h
-#        src/frontend/cpp/page4.cpp
-#        src/frontend/cpp/page4.ui
-#        src/frontend/include/page5.h
-#        src/frontend/cpp/page5.cpp
-#        src/frontend/cpp/page5.ui
-        src/frontend/include/pages.h
-        src/frontend/cpp/pages.cpp
-        src/frontend/main.cpp
-        src/frontend/include/loading.h
-        src/frontend/cpp/loading.cpp
-#        src/frontend/include/WorkThread.h
-        )
 
-#add_library(psi_cm20 STATIC  src/qtapi/psi_cm20.cpp  src/qtapi/messge.hpp)
-#target_link_libraries(psi_cm20 ${OPENSSL_LIBRARIES} OpenMP::OpenMP_CXX ${CMAKE_DL_LIBS})
+
+
 
 
 #[[!!!有时会遇到 seal/seal.h 找不到的错误]]
@@ -121,11 +95,52 @@ add_library(sealpir src/mpc/pir/pir.hpp src/mpc/pir/pir.cpp src/mpc/pir/pir_clie
         src/mpc/pir/pir_server.cpp  )
 
 target_link_libraries(sealpir SEAL::seal)
+
+# 管理资源文件
+qt5_add_resources (img src/frontend/cpp/icon.qrc)
+
+add_executable(private
+        src/frontend/include/mainwindow.h
+        src/frontend/cpp/mainwindow.cpp
+        src/frontend/cpp/mainwindow.ui
+        src/frontend/include/pages.h
+        src/frontend/cpp/pages.cpp
+        src/frontend/main.cpp
+        src/frontend/include/loading.h
+        src/frontend/cpp/loading.cpp
+        ${img}
+        )
+
 target_link_libraries(private
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
         Qt5::Concurrent
         sealpir
+
         ${OPENSSL_LIBRARIES} OpenMP::OpenMP_CXX ${CMAKE_DL_LIBS}
         )
+
+
+
+# 这一步 不一定需要
+# 设置生成的安装包名字
+set(CPACK_PACKAGE_NAME "PSI_and_PIR")
+# 设置支持指定安装目录的控制为 ON
+set(CPACK_SET_DESTDIR ON)
+# 设置安装到的目录路径
+set(CPACK_INSTALL_PREFIX "/myproject")
+# 这是生成的安装的版本号信息
+set(CPACK_PACKAGE_VERSION "1.0.0")
+# 设置 group 名字
+set(CPACK_RPM_PACKAGE_GROUP "xiansong")
+# 设置 vendor 名字
+set(CPACK_PACKAGE_VENDOR "xiansong")
+# 设置 license 信息
+set(CPACK_RPM_PACKAGE_LICENSE "No License")
+
+install(TARGETS private DESTINATION bin)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md DESTINATION share/private)
+
+
+include(CPack)

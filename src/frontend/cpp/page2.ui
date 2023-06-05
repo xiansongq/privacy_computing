@@ -91,6 +91,10 @@
        <property name="text">
         <string>选择文件1</string>
        </property>
+       <property name="icon">
+        <iconset resource="icon.qrc">
+         <normaloff>:/png/img/choisefile.png</normaloff>:/png/img/choisefile.png</iconset>
+       </property>
       </widget>
       <widget class="QPushButton" name="file2but">
        <property name="geometry">
@@ -103,6 +107,10 @@
        </property>
        <property name="text">
         <string>选择文件2</string>
+       </property>
+       <property name="icon">
+        <iconset resource="icon.qrc">
+         <normaloff>:/png/img/choisefile.png</normaloff>:/png/img/choisefile.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="startcup">
@@ -133,7 +141,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_PSI">

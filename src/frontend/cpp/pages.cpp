@@ -15,7 +15,12 @@ page1::page1(QWidget *parent) :
         ui(new Ui::page1) {
     ui->setupUi(this);
     ui->label->setMargin(0);
-
+    ui->label->setGeometry(0, 0, 620, 390);
+    ui->label->setText("<html><head/><body><p><span style=\" font-size:16pt; color:#0055ff;\">PSI(private set intersection):</span><span style=\" font-size:12pt;\">隐私集合求交是安全多方计算中的一个基础协议，两方PSI允许各自持有一隐私集合的用户安全计算两集合的交集，输出结果除交集外不泄露任何信息。 本项目实现的PSI协议来源于论文</span><a href=\"https://eprint.iacr.org/2020/729.pdf\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">《Private Set Intersection in the Internet Setting From Lightweight Oblivious PRF》</span></a><span style=\" font-size:12pt;\">将其中的unordered_map替换为bloom filter使其效率进一步提升，对2^20大小的集合求交集需要10s左右（ubuntu 2核，4G）。 </span></p><p align=\"justify\"><span style=\" font-size:16pt; color:#0055ff;\">PIR(Private Information Retrieval):</span><span style=\" font-size:12pt;\">匿踪查询（也称为隐私信息检索）是安全多方计算中非常实用的一门技术与应用，可以用来保护用户的查询隐私，进而也可以保护用户的查询结果。其目标是保证用户向数据源方提交查询请求时，在查询信息不被感知与泄漏的前提下完成查询。即对于数据源方来说，只知道有查询到来，但是不知道真正的查询条件、也就不知道对方查了什么。本项目实现代码来源于论文</span><a href=\"https://eprint.iacr.org/2018/1168.pdf\"><span style=\" font-size:12pt; text-decoration: underline; color:#0000ff;\">《PIR with compressed queries and amortized query processing》</span></a><span style=\" font-size:12pt;\">，这是一个基于同态加密实现的匿踪查询方案，该项目实现从文件读取数据构建数据库再查询，对于10-1000000的查询，开销时间大约为7s（ubuntu 2核，4G）。 </span></p></body></html>");
+//    ui->label->setText("123");
+//    ui->label ->hide();
+//    label1->setText("123");
+//    label1->setGeometry(100, 100, 620, 210);
 }
 
 page1::~page1() {
@@ -31,6 +36,9 @@ page2::page2(QWidget *parent) :
     ui->setupUi(this);
     ui->label->setFont(QFont("Arial", 14));
     ui->label_2->setFont(QFont("Arial", 14));
+//    QIcon icon;
+//    icon.addFile(":/png/img/file.png");
+//    ui->file1but->setIcon(QIcon(":/png/img/save.png"));
     textBrowser = new QTextBrowser(ui->stackedWidget);
     textBrowser->hide();
     textBrowser->setGeometry(0, 250, 620, 200);         // 设置textbrowser在父窗口中的位置和大小
@@ -38,7 +46,7 @@ page2::page2(QWidget *parent) :
     savefile->setText("保存文件");
     savefile->setStyleSheet("color: blue; font-size: 24px;");
     savefile->setIcon(QIcon(":/png/img/save.png"));
-    savefile->setGeometry(280, 460, 150, 42);
+    savefile->setGeometry(280, 430, 150, 42);
     savefile->hide();
     speedlabel = new QLabel(ui->stackedWidget);
     speedlabel->setGeometry(10, 210, 550, 20);
@@ -174,6 +182,7 @@ page3::page3(QWidget *parent) :
     ui->setupUi(this);
     ui->label->setFont(QFont("Arial", 14));
     ui->label_2->setFont(QFont("Arial", 14));
+    ui->label_3->setText("提示：两方通过网络通信执行PSI协议，首先启动接收方网络通信，输出结果只有接收方可见。");
     textBrowser = new QTextBrowser(ui->stackedWidget);
     textBrowser->setGeometry(0, 230, 620, 200);         // 设置textbrowser在父窗口中的位置和大小
     textBrowser->hide();
@@ -322,7 +331,7 @@ page4::page4(QWidget *parent) :
     savefile->setText("保存文件");
     savefile->setStyleSheet("color: blue; font-size: 24px;");
     savefile->setIcon(QIcon(":/png/img/save.png"));
-    savefile->setGeometry(280, 440, 150, 42);
+    savefile->setGeometry(280, 430, 150, 42);
     savefile->hide();
     speedlabel = new QLabel(ui->stackedWidget);
     speedlabel->setGeometry(200, 210, 271, 20);
@@ -449,6 +458,7 @@ page5::page5(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::page5) {
     ui->setupUi(this);
+    ui->label_3->setText("提示：通过网络通信执行PIR查询，首先要启动数据库提供方网络通信，查询结果只有查询方可间。");
     textBrowser = new QTextBrowser(ui->stackedWidget);
     textBrowser->setGeometry(0, 230, 620, 200);         // 设置textbrowser在父窗口中的位置和大小
     textBrowser->hide();

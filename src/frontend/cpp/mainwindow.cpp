@@ -15,6 +15,7 @@
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    setFixedSize(this->width(),this->height());  //禁止窗口最大化和随意改变窗口的大小
     ui->stackedWidget->addWidget(new page1);
     ui->stackedWidget->addWidget(new page2);
     ui->stackedWidget->addWidget(new page3);
@@ -72,6 +73,7 @@ void MainWindow::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column) {
 
 void MainWindow::resizeEvent(QResizeEvent *event) {
     QMainWindow::resizeEvent(event);
+    //ui->stackedWidget -> setGeometry(rect());
     resizeStackedWidgets(ui->stackedWidget);
 }
 

@@ -15,6 +15,7 @@
 #include <vector>
 //#include "../netio/stream_channel.hpp"
 #include "../mpc/pir/seal_pir.hpp"
+
 using namespace seal;
 using namespace seal::util;
 namespace PIR {
@@ -55,8 +56,8 @@ namespace PIR {
         std::vector <uint64_t> index_list;
         fin.open(filename1, std::ios::binary);
         if (!fin) {
-            message.code=0;
-            message.msg="查询文件打开失败";
+            message.code = 0;
+            message.msg = "查询文件打开失败";
             return message;
         }
         std::string line;
@@ -74,8 +75,8 @@ namespace PIR {
         std::ifstream fin1;
         fin1.open(filename2, std::ios::binary);
         if (!fin1) {
-            message.code=0;
-            message.msg="数据库文件打开失败";
+            message.code = 0;
+            message.msg = "数据库文件打开失败";
             return message;
         }
         std::string line1;
@@ -112,8 +113,8 @@ namespace PIR {
         server.set_database(move(db), number_of_items, size_per_item);
         server.preprocess_database();
         cout << "Main: database pre processed " << endl;
-        std::vector<std::string> ans;
-        for(int i=0;i<index_list.size();i++){
+        std::vector <std::string> ans;
+        for (int i = 0; i < index_list.size(); i++) {
             /*Generate query*/
             //uint64_t ele_index = Block::BlockToUint64High(index_data[i]);
             uint64_t ele_index = index_list[i];
@@ -124,29 +125,30 @@ namespace PIR {
             cout << "Main: reply generated" << endl;
             // Serialize reply (useful for sending over the network)
             //int reply_size = server.serialize_reply(reply, server_stream);
-            vector<uint8_t> elems = client.decode_reply(reply, offset);
-            for(int i=0;i<elems.size(); i++) std::cout<<elems[i] <<" ";
+            vector <uint8_t> elems = client.decode_reply(reply, offset);
+            for (int i = 0; i < elems.size(); i++) std::cout << elems[i] << " ";
             cout << "Main: reply decoded" << endl;
-            std::string str="";
-            for(int i=0;i<18; i++){
-                 str+=std::to_string(static_cast<int>(elems[i]));
+            std::string str = "";
+            for (int i = 0; i < 18; i++) {
+                str += std::to_string(static_cast<int>(elems[i]));
             }
             ans.push_back(str);
-            std::cout<<str<<std::endl;
+            std::cout << str << std::endl;
 
         }
         auto end_time = std::chrono::steady_clock::now();
         auto running_time = end_time - start_time;
         std::cout << "SealPIR: takes time = "
                   << std::chrono::duration<double, std::milli>(running_time).count() << " ms" << std::endl;
-        message.code=200;
-        message.pirdata=ans;
-        message.msg="执行成功！";
-        message.sender_time=std::chrono::duration<double, std::milli>(running_time).count();
+        message.code = 200;
+        message.pirdata = ans;
+        message.msg = "执行成功！";
+        message.sender_time = std::chrono::duration<double, std::milli>(running_time).count();
         return message;
     }
-    Message RemotePIR(std::string ip,std::string port,std::string isclient,std::string filename ){
-         //生成协议参数
+
+    Message RemotePIR(std::string ip, std::string port, std::string isclient, std::string filename) {
+        //生成协议参数
         //首先生成基本的参数
         uint64_t number_of_items = 1000000;
         uint64_t size_per_item = 20; // in bytes
@@ -176,14 +178,26 @@ namespace PIR {
 
         Message message;
         // 判断是否是client
-        if(isclient=="1"){
-            NetIO client("client",ip, std::stoi(port));
-           message=SEALPIR::Clinet(client,pir_params, enc_params,filename);
+        if (isclient == "1") {
 
+            try {
+                NetIO client("client", ip, std::stoi(port));
+                message = SEALPIR::Clinet(client, pir_params, enc_params, filename);
+            } catch (exception &e) {
+                message.code = 0;
+                message.msg = e.what();
+                return message;
+            }
             return message;
-        }else{
-            NetIO server("server",ip, std::stoi(port));
-            message=SEALPIR::Server(server,pir_params, enc_params,filename);
+        } else {
+            try {
+                NetIO server("server", ip, std::stoi(port));
+                message = SEALPIR::Server(server, pir_params, enc_params, filename);
+            } catch (exception &e) {
+                message.code = 0;
+                message.msg = e.what();
+                return message;
+            }
             return message;
         }
         return message;

@@ -25,7 +25,7 @@ inline void static localpsisender(OTEOPRF::PP pp, std::vector <block> vecy, Mess
 // 定义联机执行的 api
  Message remotepsi(std::string ip, std::string port, std::string filename, std::string isserver) ;
 
-void test() ;
+
 };
 
 #endif
