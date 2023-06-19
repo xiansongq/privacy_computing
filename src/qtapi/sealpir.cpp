@@ -144,6 +144,7 @@ namespace PIR {
         message.pirdata = ans;
         message.msg = "执行成功！";
         message.sender_time = std::chrono::duration<double, std::milli>(running_time).count();
+
         return message;
     }
 
@@ -183,6 +184,7 @@ namespace PIR {
             try {
                 NetIO client("client", ip, std::stoi(port));
                 message = SEALPIR::Clinet(client, pir_params, enc_params, filename);
+
             } catch (exception &e) {
                 message.code = 0;
                 message.msg = e.what();
@@ -193,6 +195,7 @@ namespace PIR {
             try {
                 NetIO server("server", ip, std::stoi(port));
                 message = SEALPIR::Server(server, pir_params, enc_params, filename);
+
             } catch (exception &e) {
                 message.code = 0;
                 message.msg = e.what();

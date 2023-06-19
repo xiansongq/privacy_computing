@@ -16,7 +16,11 @@ struct Message{
     std::vector<std::string> pirdata; // pir查询返回的数据
     double receiver_time; //receiver执行时间
     double sender_time; //sender 执行时间
-
+    Message(int code1,std::string msg1){
+        code=code1;
+        msg=msg1;
+    }
+    Message(){};
 };
 
 #endif //PRIVATE_MESSGE_HPP

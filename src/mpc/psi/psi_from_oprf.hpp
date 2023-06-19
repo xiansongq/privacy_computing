@@ -20,6 +20,7 @@ namespace OPRFPSI {
     }
 
     Message Receive(NetIO &io, OTEOPRF::PP &pp, std::vector <block> &vec_Y) {
+
         Message message;
         if (vec_Y.size() != pp.LEN) {
             message.code = 0;
@@ -62,10 +63,13 @@ namespace OPRFPSI {
             message.msg = "执行成功";
             message.data = ans;
         }
+
+
         return message;
     }
 
     Message Send(NetIO &io, OTEOPRF::PP &pp, std::vector <block> &vec_X) {
+
         Message message;
         if (vec_X.size() != pp.LEN) {
             message.code = 0;

@@ -212,17 +212,39 @@ color:rgb(255, 0, 0)</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPSI">
     <property name="title">
      <string>PSI联机求交</string>
     </property>
+    <addaction name="actionCM20"/>
+    <addaction name="actionECDH"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>&lt;-点这里看看</string>
+    </property>
+    <property name="icon">
+     <iconset resource="icon.qrc">
+      <normaloff>:/png/img/figer.png</normaloff>:/png/img/figer.png</iconset>
+    </property>
    </widget>
    <addaction name="menuPSI"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionCM20">
+   <property name="text">
+    <string>CM20</string>
+   </property>
+  </action>
+  <action name="actionECDH">
+   <property name="text">
+    <string>ECDH</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="icon.qrc"/>

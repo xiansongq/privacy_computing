@@ -2,13 +2,13 @@
 // Created by 17579 on 2023/5/30.
 //
 
-#include "psi_cm20.hpp"
+#include "psu_mqrpmt.hpp"
 
-namespace PSI {
-    //创建本地执行 psi 的api 需要两个函数 一边模拟 receiver 一边模拟 sender
-    void localpsireceiver(NetIO &io, OTEOPRF::PP pp, std::vector <block> vecx, Message &message, int slen) {
+namespace PSU {
+    //创建本地执行 psu 的api 需要两个函数 一边模拟 receiver 一边模拟 sender
+    void localpsureceiver(NetIO &io, mqRPMTPSU::PP &pp, std::vector <block> vecx, Message &message, int slen) {
         try {
-            message = OPRFPSI::Receive(io, pp, vecx);
+            message = mqRPMTPSU::Receive(io, pp, vecx);
         } catch (std::exception &e) {
             message.msg = e.what();
             message.code = 0;
@@ -22,10 +22,10 @@ namespace PSI {
         return;
     }
 
-//创建本地执行 psi 的api 需要两个函数 一边模拟 receiver 一边模拟 sender
-    void localpsisender(NetIO &io, OTEOPRF::PP pp, std::vector <block> vecy, Message &message) {
+//创建本地执行 psu 的api 需要两个函数 一边模拟 receiver 一边模拟 sender
+    void localpsusender(NetIO &io, mqRPMTPSU::PP &pp, std::vector <block> vecy, Message &message) {
         try {
-            message = OPRFPSI::Send(io, pp, vecy);
+            message = mqRPMTPSU::Send(io, pp, vecy);
         } catch (std::exception &e) {
             message.code = 0;
             message.msg = e.what();
@@ -36,22 +36,22 @@ namespace PSI {
 
     }
 
-    void create_netio(std::string party, OTEOPRF::PP pp, std::vector <block> vect, Message &message,
+    void create_netio(std::string party, mqRPMTPSU::PP &pp, std::vector <block> vect, Message &message,
                       int slen) {
         NetIO io(party, "127.0.0.1", 8085);
 
         if (party == "server") {
-            localpsireceiver(io, pp, vect, message, slen);
+            localpsureceiver(io, pp, vect, message, slen);
         }
 
         if (party == "client") {
-            localpsisender(io, pp, vect, message);
+            localpsusender(io, pp, vect, message);
         }
 
         // io.DeleteIo();
     }
 
-    Message localhost_PSI(std::string filename1, std::string filename2) {
+    Message localhost_PSU(std::string filename1, std::string filename2) {
         // 定义两个vector 存放文件数据
         std::vector <block> vec_x;
         //定义一个消息对象
@@ -103,20 +103,21 @@ namespace PSI {
         for (int i = 0; i < slen; i++) vec_y.push_back(Block::MakeBlock(0LL, 0LL));
         std::cout << vec_x.size() << " " << vec_y.size() << std::endl;
         CRYPTO_Initialize();
-        OTEOPRF::PP pp;
-        pp = OTEOPRF::Setup(ceil(log2(len)), 40);
-        OTEOPRF::PP pp1;
-        pp1 = OTEOPRF::Setup(ceil(log2(len)), 40);
+        mqRPMTPSU::PP pp;
+       size_t  loglen=log2(len);
+        pp = mqRPMTPSU::Setup("bloom",128, 40,loglen,loglen,slen);
+        mqRPMTPSU::PP pp1;
+        pp1 = mqRPMTPSU::Setup("bloom",128, 40,loglen,loglen,slen);
 
 //        std::thread receiverthread(PSI::localpsireceiver, std::move(pp), std::move(vec_x), std::ref(message1),
 //                                   std::move(slen));
 //
 
 //        std::thread senderthread(PSI::localpsisender, std::move(pp), std::move(vec_y), std::ref(message2));
-        std::thread receiverthread(PSI::create_netio, "server", std::move(pp), std::move(vec_x), std::ref(message1),
+        std::thread receiverthread(PSU::create_netio, "server", std::ref(pp), std::move(vec_x), std::ref(message1),
                                    std::move(slen));
 
-        std::thread senderthread(PSI::create_netio, "client", std::move(pp1), std::move(vec_y), std::ref(message2),
+        std::thread senderthread(PSU::create_netio, "client", std::ref(pp1), std::move(vec_y), std::ref(message2),
                                  std::move(slen));
         // std::thread receiverthread(PSI::localpsireceiver, pp, vec_x,&message2,slen);
         //std::thread senderthread(PSI::localpsisender, pp, vec_y, &message1);
@@ -132,7 +133,7 @@ namespace PSI {
 
 
 // 定义联机执行的 api
-    Message remotepsi(std::string ip, std::string port, std::string filename, std::string isserver, std::string type) {
+    Message remotepsu(std::string ip, std::string port, std::string filename, std::string isserver, std::string type) {
         // 读取文件
         // 定义两个vector 存放文件数据
         std::vector <block> vec_y;
@@ -165,8 +166,8 @@ namespace PSI {
         //std::cout<<"io info: "<<ip<<" "<<std::stoi(port)<<std::endl;
         //初始化参数
         CRYPTO_Initialize();
-        OTEOPRF::PP pp;
-        pp = OTEOPRF::Setup(ceil(log2(len)), 40);
+        mqRPMTPSU::PP pp;
+        pp = mqRPMTPSU::Setup("bloom",128, 40,ceil(log2(len)),ceil(log2(len)),slen);
         // std::cout<<"ip info1 "<<isserver<<std::endl;
         // 执行协议
         if (isserver == "1") {
@@ -177,7 +178,7 @@ namespace PSI {
                 block len = Block::MakeBlock('0LL', type.size());
                 server.SendBlock(len);
                 server.SendString(type);
-                message = OPRFPSI::Receive(server, pp, vec_y);
+                message = mqRPMTPSU::Receive(server, pp, vec_y);
                 server.DeleteIo();
             }
             catch (std::exception &e) {
@@ -205,7 +206,7 @@ namespace PSI {
                 if (rectype != type) {
                     return Message(0, "两方所选协议类型不同，当前服务端所选协议类型为：" + rectype + "。");
                 }
-                message = OPRFPSI::Send(client, pp, vec_y);
+                message = mqRPMTPSU::Send(client, pp, vec_y);
                 client.DeleteIo();
             } catch (std::exception &e) {
                 message.code = 0;

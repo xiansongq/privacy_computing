@@ -70,17 +70,6 @@ find_package(Qt5 COMPONENTS
         REQUIRED)
 
 
-# 添加可执行文件
-file(GLOB_RECURSE QTSOURCES
-        "src/frontend/*.cpp"
-        "src/frontend/*.h"
-        "src/frontend/*.ui"
-        )
-
-
-
-
-
 #[[!!!有时会遇到 seal/seal.h 找不到的错误]]
 find_package(SEAL 4.0  REQUIRED)
 
@@ -117,11 +106,11 @@ target_link_libraries(private
         Qt5::Widgets
         Qt5::Concurrent
         sealpir
-
         ${OPENSSL_LIBRARIES} OpenMP::OpenMP_CXX ${CMAKE_DL_LIBS}
         )
 
-
+#add_executable(ecdh_psi src/test/tes_ecdh_pis.cpp)
+#target_link_libraries(ecdh_psi  ${OPENSSL_LIBRARIES} OpenMP::OpenMP_CXX ${CMAKE_DL_LIBS})
 
 # 这一步 不一定需要
 # 设置生成的安装包名字

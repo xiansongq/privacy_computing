@@ -148,10 +148,43 @@
     <property name="title">
      <string>本地PSI</string>
     </property>
+    <addaction name="actionCM20"/>
+    <addaction name="actionECDH"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="geometry">
+     <rect>
+      <x>488</x>
+      <y>158</y>
+      <width>141</width>
+      <height>54</height>
+     </rect>
+    </property>
+    <property name="tearOffEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>&lt;-点我看看</string>
+    </property>
+    <property name="icon">
+     <iconset resource="icon.qrc">
+      <normaloff>:/png/img/figer.png</normaloff>:/png/img/figer.png</iconset>
+    </property>
    </widget>
    <addaction name="menu_PSI"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionCM20">
+   <property name="text">
+    <string>CM20</string>
+   </property>
+  </action>
+  <action name="actionECDH">
+   <property name="text">
+    <string>ECDH</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="icon.qrc"/>

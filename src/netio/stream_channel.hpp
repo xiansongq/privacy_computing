@@ -33,9 +33,11 @@ public:
     NetIO();
 
     NetIO(std::string party, std::string address, int port);   //构造函数
-
+    void DeleteIo() ;  //定义一个显示的析构函数
+    void flush();
     void SetNodelay();  //设置TCP_NODELAY选项
     void SetDelay();    //关闭TCP_NODELY选项
+
 
     void SendDataInternal(const void *data, size_t LEN);    //发送数据到缓冲区
     void ReceiveDataInternal(const void *data, size_t LEN);  //接收数据到缓冲区
@@ -104,6 +106,7 @@ NetIO::NetIO(std::string party, std::string address, int port) {
     this->port = port & 0xFFFF;
 
     if (party == "server") {
+        this->IS_SERVER=true;
         // create server master socket: socket descriptor is an integer (like a file-handle)
         this->server_master_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
@@ -155,6 +158,7 @@ NetIO::NetIO(std::string party, std::string address, int port) {
             perror("error: fail to accept client socket");
             exit(EXIT_FAILURE);
         }
+        close(this->server_master_socket); //关闭服务器连接 想短时间内重新执行代码 这一句必不可少
     } else {
         IS_SERVER = false;
 
@@ -178,6 +182,7 @@ NetIO::NetIO(std::string party, std::string address, int port) {
         }
     }
 
+
     SetNodelay();
 
     // very impprotant: bind the socket to a file stream
@@ -185,6 +190,20 @@ NetIO::NetIO(std::string party, std::string address, int port) {
     buffer = new char[NETWORK_BUFFER_SIZE];
     memset(buffer, 0, NETWORK_BUFFER_SIZE);
     setvbuf(stream, buffer, _IOFBF, NETWORK_BUFFER_SIZE); // Specifies a buffer for stream
+}
+
+
+void NetIO::flush() {
+    fflush(stream);
+}
+
+void NetIO::DeleteIo() {
+    flush();
+
+    if (stream != nullptr) {
+        fclose(stream);
+    }
+    delete[] buffer;
 }
 
 
