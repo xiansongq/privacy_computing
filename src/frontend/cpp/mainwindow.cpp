@@ -15,7 +15,7 @@
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    ui->widget1->setStyleSheet("#widget1 { border: 2px solid black; }");
+    ui->widget1->setStyleSheet("#widget1 { border: 4px solid #808080; }");
 
     setFixedSize(this->width(),this->height());  //禁止窗口最大化和随意改变窗口的大小
     ui->stackedWidget->addWidget(new page1);
@@ -49,7 +49,7 @@ void MainWindow::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column) {
     if (parentItem != nullptr) {
         parentMenuText = parentItem->text(column);
     }
-     qDebug()<<parentMenuText;
+     //qDebug()<<parentMenuText;
     QString ancestorMenuText = "";
     QTreeWidgetItem *ancestorItem = item;
     while (ancestorItem->parent() != nullptr) // 循环获取祖先节点

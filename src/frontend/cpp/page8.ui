@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>5</y>
-      <width>530</width>
-      <height>212</height>
+      <y>20</y>
+      <width>600</width>
+      <height>240</height>
      </rect>
     </property>
     <property name="acceptDrops">
@@ -34,7 +34,7 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;PSI&lt;/span&gt;(private set intersection):隐私集合求交是安全多方计算中的一个基础协议，两方PSI允许各自持有一隐私集合的用户安全计算两集合的交集，输出结果除交集外不泄露任何信息。本项目实现的PSI协议来源于论文《&lt;span style=&quot; color:#5555ff;&quot;&gt;Private Set Intersection in the Internet Setting From Lightweight Oblivious PRF&lt;/span&gt;》将其中的unordered_map替换为bloom filter使其效率进一步提升，对2^20大小的集合求交集需要10s左右（ubuntu 2核，4G）。 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;PSI&lt;/span&gt;(private set intersection):隐私集合求交是安全多方计算中的一个基础协议，两方PSI允许各自持有一隐私集合的用户安全计算两集合的交集，输出结果除交集外不泄露任何信息。本项目实现了两种不同的PSI协议，其中CM20协议来源于论文《&lt;span style=&quot; color:#5555ff;&quot;&gt;Private Set Intersection in the Internet Setting From Lightweight Oblivious PRF&lt;/span&gt;》它是基于多点不经意伪随机函数和OTE实现，本项目将其中的unordered_map替换为bloom filter使其效率进一步提升，对2^20大小的集合求交集需要10s左右（ubuntu 2核，4G）。同时，还实现了基于ECDH的PSI协议，本项目使用Curve25519椭圆曲线实现ECDH，进一步提高计算效率。基于ECDH的PSI协议适合小集合场景（集合大小小于1000）,推荐小集合时选择ECDH PSI，大集合时选择CM20协议。 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="scaledContents">
      <bool>false</bool>

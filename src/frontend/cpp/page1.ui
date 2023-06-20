@@ -18,8 +18,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
-      <width>591</width>
+      <y>-10</y>
+      <width>600</width>
       <height>212</height>
      </rect>
     </property>
@@ -27,7 +27,7 @@
      <string notr="true">padding-top:0px;</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;本软件旨在为用户提供一个可视化的隐私计算平台，目前提供三种隐私计算协议：隐私集合求交、隐私集合求并、匿踪查询。它们都是安全多方计算中的基础协议，在保护数据隐私场景中得到广泛应用，目前正在从学术界走向工业界应用。本项目提供的三种隐私计算协议，实现简单、安全性高，效率可观。&lt;br/&gt;该软件适用于linux平台，安装简单，操作简单。&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;本软件旨在为用户提供一个可视化的隐私计算平台，目前提供三种隐私计算协议：隐私集合求交、隐私集合求并、匿踪查询。它们都是安全多方计算中的基础协议，在保护数据隐私场景中得到广泛应用，目前正在从学术界走向工业界应用。本软件提供的三种隐私计算协议，实现简单、安全性高，效率可观。&lt;br/&gt;该软件适用于Linux平台，安装简单，操作简单。&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>

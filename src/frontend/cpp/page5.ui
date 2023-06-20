@@ -189,7 +189,7 @@ color:rgb(255, 0, 0)</string>
         <x>10</x>
         <y>10</y>
         <width>620</width>
-        <height>30</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -197,10 +197,13 @@ color:rgb(255, 0, 0)</string>
 color:rgb(255, 0, 0)</string>
       </property>
       <property name="text">
-       <string>提示：联机执行两方PIR，首先要输入对方ip地址和端口号，需要指明谁是查询方。</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;提示：联机执行两方PIR，首先数据库提供方输入自己的ip和要使用的端口，选择文件，点击开始查询进行数据库制作。查询方输入服务方的ip和端口，上传要查询的index文件，勾选查询方，进行查询。查询结果输出到查询方。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
        <enum>Qt::RichText</enum>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -212,7 +215,7 @@ color:rgb(255, 0, 0)</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPIR">

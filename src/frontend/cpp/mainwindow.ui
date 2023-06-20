@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="widget1" native="true">
     <property name="geometry">
@@ -102,8 +105,8 @@
            <property name="font">
             <font>
              <pointsize>11</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </item>
@@ -114,8 +117,8 @@
            <property name="font">
             <font>
              <pointsize>11</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </item>
@@ -126,8 +129,8 @@
            <property name="font">
             <font>
              <pointsize>11</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <weight>50</weight>
+             <bold>false</bold>
             </font>
            </property>
           </item>
@@ -150,7 +153,7 @@
            </property>
            <property name="font">
             <font>
-             <family>楷体</family>
+             <family>DejaVu Sans</family>
              <pointsize>11</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -163,7 +166,7 @@
            </property>
            <property name="font">
             <font>
-             <family>楷体</family>
+             <family>DejaVu Sans</family>
              <pointsize>11</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -188,6 +191,7 @@
            </property>
            <property name="font">
             <font>
+             <family>DejaVu Sans</family>
              <pointsize>11</pointsize>
              <weight>75</weight>
              <bold>true</bold>
@@ -200,6 +204,7 @@
            </property>
            <property name="font">
             <font>
+             <family>DejaVu Sans</family>
              <pointsize>11</pointsize>
              <weight>75</weight>
              <bold>true</bold>

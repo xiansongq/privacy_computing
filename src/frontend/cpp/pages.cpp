@@ -214,7 +214,7 @@ page3::page3(QWidget *parent) :
     ui->setupUi(this);
     ui->label->setFont(QFont("Arial", 14));
     ui->label_2->setFont(QFont("Arial", 14));
-    ui->label_3->setText("提示：两方通过网络通信执行PSI协议，首先启动接收方网络通信，输出结果只有接收方可见。");
+    //ui->label_3->setText("提示：两方通过网络通信执行PSI协议，首先启动接收方网络通信，输出结果只有接收方可见。");
     textBrowser = new QTextBrowser(ui->stackedWidget);
     textBrowser->setGeometry(0, 230, 620, 200);         // 设置textbrowser在父窗口中的位置和大小
     textBrowser->hide();
@@ -530,7 +530,7 @@ page5::page5(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::page5) {
     ui->setupUi(this);
-    ui->label_3->setText("提示：通过网络通信执行PIR查询，首先要启动数据库提供方网络通信，查询结果只有查询方可间。");
+   // ui->label_3->setText("提示：通过网络通信执行PIR查询，首先要启动数据库提供方网络通信，查询结果只有查询方可间。");
     textBrowser = new QTextBrowser(ui->stackedWidget);
     textBrowser->setGeometry(0, 230, 620, 200);         // 设置textbrowser在父窗口中的位置和大小
     textBrowser->hide();
@@ -874,7 +874,7 @@ page7::page7(QWidget *parent) :
     ui->setupUi(this);
     ui->label->setFont(QFont("Arial", 14));
     ui->label_2->setFont(QFont("Arial", 14));
-    ui->label_3->setText("提示：两方通过网络通信执行PSI协议，首先启动接收方网络通信，输出结果只有接收方可见。");
+    //ui->label_3->setText("提示：两方通过网络通信执行PSI协议，首先启动接收方网络通信，输出结果只有接收方可见。");
     textBrowser = new QTextBrowser(ui->stackedWidget);
     textBrowser->setGeometry(0, 230, 620, 200);         // 设置textbrowser在父窗口中的位置和大小
     textBrowser->hide();

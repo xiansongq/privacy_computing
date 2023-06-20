@@ -18,13 +18,13 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>-10</y>
-      <width>530</width>
-      <height>212</height>
+      <y>-20</y>
+      <width>600</width>
+      <height>220</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;PSU&lt;/span&gt;(private set union)：隐私集合求并是安全多方计算中的一种实用协议，PSU指联合计算集合的并集而不泄露其它任何与交集有关的信息。PSU协议在黑名单数据聚集、隐私ID构造上得到应用。本项目实现的PSU协议是基于mqRPMT（多点反向私有成员测试）协议，实现来源于论文《&lt;span style=&quot; color:#5555ff;&quot;&gt;Private Set Operations from Multi-Query Reverse Private Membership Test&lt;/span&gt;》，在集合大小为2^20，并集结果为1451424的测试数据下，时间开销为60s左右。（ubuntu 2核， 4G）&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;PSU&lt;/span&gt;(private set union)：隐私集合求并是安全多方计算中的一种实用协议，PSU指联合计算集合的并集而不泄露其它任何与交集有关的信息。PSU协议在黑名单数据聚集、隐私ID构造上得到应用。本项目实现的PSU协议是基于mqRPMT（多点反向私有成员测试）协议，实现来源于论文《&lt;span style=&quot; color:#5555ff;&quot;&gt;Private Set Operations from Multi-Query Reverse Private Membership Test&lt;/span&gt;》，在集合大小为2^20，并集结果大小为1451424的测试数据下，时间开销为60s左右。（ubuntu 2核， 4G）&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="wordWrap">
      <bool>true</bool>
