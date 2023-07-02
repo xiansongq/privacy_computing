@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(private)
+project(privacy_computing)
 
 # On some machines, the path of OpenSSL is  /usr/local/lib64/openssl/libcrypto.a
 IF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -61,6 +61,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+set(Qt5_DIR /usr/lib/x86_64-linux-gnu)  # 将路径替换为你Qt库的实际路径
 
 find_package(Qt5 COMPONENTS
         Core
@@ -68,7 +69,13 @@ find_package(Qt5 COMPONENTS
         Widgets
         Concurrent
         REQUIRED)
-
+# 添加Qt静态库
+set(QT_STATIC_LIBRARIES
+        Qt5::Core
+        Qt5::Gui
+        Qt5::Widgets
+        Qt5::Concurrent
+        )
 
 #[[!!!有时会遇到 seal/seal.h 找不到的错误]]
 find_package(SEAL 4.0  REQUIRED)
@@ -100,13 +107,20 @@ add_executable(private
         ${img}
         )
 
+#target_link_libraries(private
+#        Qt5::Core
+#        Qt5::Gui
+#        Qt5::Widgets
+#        Qt5::Concurrent
+#        sealpir
+#        ${OPENSSL_LIBRARIES} OpenMP::OpenMP_CXX ${CMAKE_DL_LIBS}
+#        )
 target_link_libraries(private
-        Qt5::Core
-        Qt5::Gui
-        Qt5::Widgets
-        Qt5::Concurrent
+        ${QT_STATIC_LIBRARIES}
         sealpir
-        ${OPENSSL_LIBRARIES} OpenMP::OpenMP_CXX ${CMAKE_DL_LIBS}
+        ${OPENSSL_LIBRARIES}
+        OpenMP::OpenMP_CXX
+        ${CMAKE_DL_LIBS}
         )
 
 #add_executable(ecdh_psi src/test/tes_ecdh_pis.cpp)
@@ -114,11 +128,11 @@ target_link_libraries(private
 
 # 这一步 不一定需要
 # 设置生成的安装包名字
-set(CPACK_PACKAGE_NAME "PSI_and_PIR")
+set(CPACK_PACKAGE_NAME "privacy_computing")
 # 设置支持指定安装目录的控制为 ON
 set(CPACK_SET_DESTDIR ON)
 # 设置安装到的目录路径
-set(CPACK_INSTALL_PREFIX "/myproject")
+set(CPACK_INSTALL_PREFIX "/software")
 # 这是生成的安装的版本号信息
 set(CPACK_PACKAGE_VERSION "1.0.0")
 # 设置 group 名字
@@ -127,9 +141,14 @@ set(CPACK_RPM_PACKAGE_GROUP "xiansong")
 set(CPACK_PACKAGE_VENDOR "xiansong")
 # 设置 license 信息
 set(CPACK_RPM_PACKAGE_LICENSE "No License")
+# 指定输出文件类型为ZIP和TGZ
+set(CPACK_GENERATOR "ZIP;TGZ")
 
 install(TARGETS private DESTINATION bin)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md DESTINATION share/private)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md DESTINATION . )
+
+
+install(DIRECTORY   ${CMAKE_CURRENT_SOURCE_DIR}/testfile/ DESTINATION testfile)
 
 
 include(CPack)

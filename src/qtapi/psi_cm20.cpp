@@ -177,6 +177,13 @@ namespace PSI {
                 block len = Block::MakeBlock('0LL', type.size());
                 server.SendBlock(len);
                 server.SendString(type);
+                size_t cmp;
+                server.ReceiveInteger(cmp);
+                std::cout<<"cmp value :"<<cmp<<std::endl;
+                if(cmp==-1){
+                    server.DeleteIo();
+                    return Message(0, "两方所选协议类型不同，你所选协议为：" + type + "。");
+                }
                 message = OPRFPSI::Receive(server, pp, vec_y);
                 server.DeleteIo();
             }
@@ -203,6 +210,8 @@ namespace PSI {
                 std::string rectype(strlen, '0');
                 client.ReceiveString(rectype);
                 if (rectype != type) {
+                    client.SendInteger(-1);
+                    client.DeleteIo();
                     return Message(0, "两方所选协议类型不同，当前服务端所选协议类型为：" + rectype + "。");
                 }
                 message = OPRFPSI::Send(client, pp, vec_y);
