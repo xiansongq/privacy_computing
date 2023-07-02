@@ -12,7 +12,7 @@
 - PIR
   - sealPIR
 
-所有的协议都提供本地执行和在线远程执行两个版本。filetest文件中提供了一些测试数据，大小分别为$2^{10}$ 和$2^{20}$。 
+所有的协议都提供本地执行和在线远程执行两个版本。filetest文件中提供了一些测试数据，大小分别为$$2^{10}$$ 和$$2^{20}$$。 
 
 #### 2、源码编译安装
 
@@ -89,7 +89,7 @@ make
 
 ##### 4、参考资料
 
-该软件实现了一下论文描述的算法：
+该软件实现了以下论文描述的算法：
 
 - Chase M, Miao P. Private set intersection in the internet setting from lightweight oblivious PRF[C]//Advances in Cryptology–CRYPTO 2020: 40th Annual International Cryptology Conference, CRYPTO 2020, Santa Barbara, CA, USA, August 17–21, 2020, Proceedings, Part III 40. Springer International Publishing, 2020: 34-63.
 - Angel S, Chen H, Laine K, et al. PIR with compressed queries and amortized query processing[C]//2018 IEEE symposium on security and privacy (SP). IEEE, 2018: 962-979.
