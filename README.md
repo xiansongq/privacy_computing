@@ -99,3 +99,7 @@ make
 
 [yuchen1024/Kunlun: A C++ library containing both easy-to-use lower level bigint/ecgroup interfaces and high-level cryptographical schemes/protocols. (github.com)](https://github.com/yuchen1024/Kunlun)
 
+
+[![Security Status](https://www.murphysec.com/platform3/v31/badge/1671012518867001344.svg)](https://www.murphysec.com/console/report/1671012518770532352/1671012518867001344)
+
+
